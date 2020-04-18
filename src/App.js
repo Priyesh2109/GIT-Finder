@@ -11,6 +11,12 @@ import Alert from "./components/layout/Alert";
 import About from "./components/pages/About";
 import axios from "axios";
 
+const github = axios.create({
+  baseURL: "https://api.github.com",
+  timeout: 3000,
+  headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN }
+});
+
 class App extends Component {
   state = {
     users: [],
@@ -18,23 +24,18 @@ class App extends Component {
     loading: false,
     alert: null
   };
+
   //search git users
   searchUsers = async text => {
     this.setState({ loading: true });
-    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${
-      process.env.REACT_APP_GITHUB_CLIENT_ID
-    }&client_secret=$
-    {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+    const res = await github.get(`/search/users?q=${text}`);
     this.setState({ users: res.data.items, loading: false });
   };
 
   getUser = async username => {
     this.setState({ loading: true });
 
-    const res = await axios.get(`https://api.github.com/users/${username}&client_id=${
-      process.env.REACT_APP_GITHUB_CLIENT_ID
-    }&client_secret=$
-    {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+    const res = await github.get(`/users/${username}?`);
 
     this.setState({ user: res.data, loading: false });
   };
