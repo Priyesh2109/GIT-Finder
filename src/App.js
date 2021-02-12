@@ -27,13 +27,13 @@ class App extends Component {
   };
 
   //search git users
-  searchUsers = async text => {
+  searchUsers = async (text) => {
     this.setState({ loading: true });
     const res = await github.get(`/search/users?q=${text}`);
     this.setState({ users: res.data.items, loading: false });
   };
 
-  getUser = async username => {
+  getUser = async (username) => {
     this.setState({ loading: true });
 
     const res = await github.get(`/users/${username}?`);
@@ -43,7 +43,7 @@ class App extends Component {
 
   // Get users repos
 
-  getUserRepos = async username => {
+  getUserRepos = async (username) => {
     this.setState({ loading: true });
 
     const res = await axios.get(
@@ -76,7 +76,7 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={props => (
+                render={(props) => (
                   <Fragment>
                     <Search
                       searchUsers={this.searchUsers}
@@ -92,7 +92,7 @@ class App extends Component {
               <Route
                 exact
                 path="/user/:login"
-                render={props => (
+                render={(props) => (
                   <User
                     {...props}
                     getUser={this.getUser}

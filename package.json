@@ -1,7 +1,7 @@
 {
-  "name": "final-version-of-git-hub-finder",
+  "name": "github-finder",
   "version": "1.0.0",
-  "description": "",
+  "description": "A github account finder, built purely using React. I didn't work on responsiveness as firstly I wanted to focus on learning react and secondly because I would think this is a desktop application",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
